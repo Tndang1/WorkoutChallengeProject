@@ -62,7 +62,7 @@ class WorkoutTest {
 		assertTrue(rv.size()>0);
 	}
 	@Test
-	void workout_user_mapping() {
+	void workout_user() {
 		User user = workout.getUser();
 		assertNotNull(user);
 		assertEquals("user", user.getUsername());

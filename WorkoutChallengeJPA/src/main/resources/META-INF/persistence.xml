@@ -9,7 +9,12 @@
     </provider>
     
     <!--  List Entities Here -->
-   <class>com.dang.workout.entities.Test</class>
+   <class>com.dang.workout.entities.User</class>
+   <class>com.dang.workout.entities.Workout</class>
+   <class>com.dang.workout.entities.Review</class>
+   <class>com.dang.workout.entities.AttemptedWorkout</class>
+   <class>com.dang.workout.entities.AttemptedWorkoutId</class>
+   <class>com.dang.workout.entities.Exercise</class>
 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/workoutdb?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=CST" />

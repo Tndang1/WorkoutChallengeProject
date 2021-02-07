@@ -2,10 +2,14 @@ package com.dang.workout.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,6 +25,17 @@ public class User {
 	private List<Workout> submittedWorkouts;
 	@OneToMany(mappedBy="user")
 	private List<Review> userReviews;
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@JoinTable(name="saved_workout",
+	joinColumns = @JoinColumn (name="user_id"),
+	inverseJoinColumns = @JoinColumn(name="workout_id"))
+	private List<Workout> savedWorkouts;
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@JoinTable(name="attempted_workout",
+	joinColumns = @JoinColumn (name="user_id"),
+	inverseJoinColumns = @JoinColumn(name="workout_id"))
+	private List<Workout> attemptedWorkouts;
+	
 	
 	public int getId() {
 		return id;
@@ -63,6 +78,18 @@ public class User {
 	}
 	public void setUserReviews(List<Review> userReviews) {
 		this.userReviews = userReviews;
+	}
+	public List<Workout> getSavedWorkouts() {
+		return savedWorkouts;
+	}
+	public void setSavedWorkouts(List<Workout> savedWorkouts) {
+		this.savedWorkouts = savedWorkouts;
+	}
+	public List<Workout> getAttemptedWorkouts() {
+		return attemptedWorkouts;
+	}
+	public void setAttemptedWorkouts(List<Workout> attemptedWorkouts) {
+		this.attemptedWorkouts = attemptedWorkouts;
 	}
 	@Override
 	public int hashCode() {

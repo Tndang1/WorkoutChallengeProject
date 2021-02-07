@@ -1,6 +1,7 @@
+
 package com.dang.workout.entities;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,10 +13,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ReviewTest {
+class AttemptedWorkoutTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Review review;
+	private AttemptedWorkoutId awoId;
+	private AttemptedWorkout awo;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -30,33 +32,21 @@ class ReviewTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		review = em.find(Review.class, 1);
+		awoId = new AttemptedWorkoutId(1, 1);
+		awo = em.find(AttemptedWorkout.class, awoId);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		review = null;
+		awoId = null;
+		awo = null;
 		em.close();
 	}
 
 	@Test
-	void test_review_db_connection() {
-		assertNotNull(review);
-		assertEquals(1, review.getId());
-		assertEquals(3, review.getRating());
-		assertEquals("This isn't the complete short card.", review.getReview());
-	}
-	@Test
-	void test_review_workout() {
-		Workout wo = review.getWorkout();
-		assertNotNull(wo);
-		assertEquals(1, wo.getId());
-	}
-	@Test
-	void test_review_user() {
-		User user = review.getUser();
-		assertNotNull(user);
-		assertEquals(1, user.getId());
+	void test_attemptedWorkout_db_connection() {
+		assertNotNull(awo);
+		assertEquals(true, awo.isCompleted());
 	}
 
 }

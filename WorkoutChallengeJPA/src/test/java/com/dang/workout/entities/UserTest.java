@@ -1,6 +1,9 @@
 package com.dang.workout.entities;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -45,6 +48,30 @@ class UserTest {
 		assertEquals(1, user.getId());
 		assertEquals("user", user.getUsername());
 		assertEquals("user", user.getRole());
+	}
+	@Test
+	void test_user_submittedWorkouts() {
+		List<Workout> sw = user.getSubmittedWorkouts();
+		assertNotNull(sw);
+		assertTrue(sw.size() > 0);
+	}
+	@Test
+	void test_user_reviews() {
+		List<Review> rv = user.getUserReviews();
+		assertNotNull(rv);
+		assertTrue(rv.size() > 0);
+	}
+	@Test
+	void test_user_saved_workouts() {
+		List<Workout> savWO = user.getSavedWorkouts();
+		assertNotNull(savWO);
+		assertTrue(savWO.size() > 0);
+	}
+	@Test
+	void test_user_attempted_workouts() {
+		List<Workout> aw = user.getAttemptedWorkouts();
+		assertNotNull(aw);
+		assertTrue(aw.size() > 0);
 	}
 
 }

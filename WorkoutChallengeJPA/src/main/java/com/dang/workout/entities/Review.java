@@ -25,6 +25,7 @@ public class Review {
 	@ManyToOne
 	@JoinColumn(name="workout_id")
 	private Workout workout;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
