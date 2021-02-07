@@ -45,5 +45,11 @@ class ExerciseTest {
 		assertEquals(1, ex.getId());
 		assertEquals("Push-ups", ex.getName());
 	}
+	@Test
+	void test_exercise_workout_mapping() {
+		Workout wo = ex.getWorkout();
+		assertNotNull(wo);
+		assertEquals("The Short Card / No Equipment", wo.getTitle());
+	}
 
 }

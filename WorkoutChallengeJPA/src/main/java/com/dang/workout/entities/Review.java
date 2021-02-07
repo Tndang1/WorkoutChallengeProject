@@ -5,7 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="workout_review")
@@ -17,6 +21,13 @@ public class Review {
 	private String review;
 	@Column(name="workout_complete")
 	private boolean complete;
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="workout_id")
+	private Workout workout;
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	public int getId() {
 		return id;
 	}
@@ -40,6 +51,18 @@ public class Review {
 	}
 	public void setComplete(boolean complete) {
 		this.complete = complete;
+	}
+	public Workout getWorkout() {
+		return workout;
+	}
+	public void setWorkout(Workout workout) {
+		this.workout = workout;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	@Override
 	public int hashCode() {

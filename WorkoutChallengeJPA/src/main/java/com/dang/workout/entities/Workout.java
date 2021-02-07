@@ -1,10 +1,15 @@
 package com.dang.workout.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Workout {
@@ -18,6 +23,14 @@ public class Workout {
 	@Column(name="estimated_time")
 	private String estimatedTime;
 	private double rating;
+	@OneToMany(mappedBy="workout")
+	private List<Exercise> exercise;
+	@OneToMany(mappedBy="workout")
+	private List<Review> reviews;
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
 	public int getId() {
 		return id;
 	}
@@ -53,6 +66,24 @@ public class Workout {
 	}
 	public void setRating(double rating) {
 		this.rating = rating;
+	}
+	public List<Exercise> getExercise() {
+		return exercise;
+	}
+	public void setExercise(List<Exercise> exercise) {
+		this.exercise = exercise;
+	}
+	public List<Review> getReviews() {
+		return reviews;
+	}
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	@Override
 	public int hashCode() {

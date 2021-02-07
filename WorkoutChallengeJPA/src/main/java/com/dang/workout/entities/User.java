@@ -1,9 +1,12 @@
 package com.dang.workout.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -14,6 +17,10 @@ public class User {
 	private String password;
 	private String role;
 	private boolean enabled;
+	@OneToMany(mappedBy="user")
+	private List<Workout> submittedWorkouts;
+	@OneToMany(mappedBy="user")
+	private List<Review> userReviews;
 	
 	public int getId() {
 		return id;
@@ -44,6 +51,18 @@ public class User {
 	}
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	public List<Workout> getSubmittedWorkouts() {
+		return submittedWorkouts;
+	}
+	public void setSubmittedWorkouts(List<Workout> submittedWorkouts) {
+		this.submittedWorkouts = submittedWorkouts;
+	}
+	public List<Review> getUserReviews() {
+		return userReviews;
+	}
+	public void setUserReviews(List<Review> userReviews) {
+		this.userReviews = userReviews;
 	}
 	@Override
 	public int hashCode() {

@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Exercise {
@@ -15,6 +19,10 @@ public class Exercise {
 	private Integer duration;
 	private Double weight;
 	private String equipment;
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="workout_id")
+	private Workout workout;
 	public int getId() {
 		return id;
 	}
@@ -50,6 +58,12 @@ public class Exercise {
 	}
 	public void setEquipment(String equipment) {
 		this.equipment = equipment;
+	}
+	public Workout getWorkout() {
+		return workout;
+	}
+	public void setWorkout(Workout workout) {
+		this.workout = workout;
 	}
 	@Override
 	public int hashCode() {

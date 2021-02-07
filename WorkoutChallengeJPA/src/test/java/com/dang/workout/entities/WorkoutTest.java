@@ -1,6 +1,10 @@
 package com.dang.workout.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -45,5 +49,22 @@ class WorkoutTest {
 		assertEquals("The Short Card / No Equipment", workout.getTitle());
 		assertEquals(false, workout.isReqEquip());
 	}
-
+	@Test
+	void workout_exercise_mapping() {
+		List<Exercise> ex = workout.getExercise();
+		assertNotNull(ex);
+		assertTrue(ex.size() > 0);
+	}
+	@Test
+	void workout_review_mapping() {
+		List<Review> rv = workout.getReviews();
+		assertNotNull(rv);
+		assertTrue(rv.size()>0);
+	}
+	@Test
+	void workout_user_mapping() {
+		User user = workout.getUser();
+		assertNotNull(user);
+		assertEquals("user", user.getUsername());
+	}
 }
