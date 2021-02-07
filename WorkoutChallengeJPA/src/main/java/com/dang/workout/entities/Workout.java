@@ -30,6 +30,8 @@ public class Workout {
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
+	@OneToMany(mappedBy="workout")
+	private List<AttemptedWorkout> attempts;
 	
 	public int getId() {
 		return id;
@@ -84,6 +86,12 @@ public class Workout {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public List<AttemptedWorkout> getAttempts() {
+		return attempts;
+	}
+	public void setAttempts(List<AttemptedWorkout> attempts) {
+		this.attempts = attempts;
 	}
 	@Override
 	public int hashCode() {

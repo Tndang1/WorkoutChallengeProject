@@ -1,20 +1,43 @@
 package com.dang.workout.entities;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="attempted_workout")
 public class AttemptedWorkout {
-	@EmbeddedId
-	private AttemptedWorkoutId id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	@ManyToOne
+	@JoinColumn(name="workout_id")
+	private Workout workout;
 	private boolean completed;
-	public AttemptedWorkoutId getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(AttemptedWorkoutId id) {
+	public void setId(int id) {
 		this.id = id;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Workout getWorkout() {
+		return workout;
+	}
+	public void setWorkout(Workout workout) {
+		this.workout = workout;
 	}
 	public boolean isCompleted() {
 		return completed;
@@ -26,8 +49,7 @@ public class AttemptedWorkout {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (completed ? 1231 : 1237);
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + id;
 		return result;
 	}
 	@Override
@@ -39,12 +61,7 @@ public class AttemptedWorkout {
 		if (getClass() != obj.getClass())
 			return false;
 		AttemptedWorkout other = (AttemptedWorkout) obj;
-		if (completed != other.completed)
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		if (id != other.id)
 			return false;
 		return true;
 	}
@@ -52,5 +69,4 @@ public class AttemptedWorkout {
 	public String toString() {
 		return "AttemptedWorkout [id=" + id + ", completed=" + completed + "]";
 	}
-
 }

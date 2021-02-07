@@ -67,4 +67,10 @@ class WorkoutTest {
 		assertNotNull(user);
 		assertEquals("user", user.getUsername());
 	}
+	@Test
+	void workout_attempts() {
+		List<AttemptedWorkout> a = workout.getAttempts();
+		assertNotNull(a);
+		assertTrue(a.size() > 0);
+	}
 }

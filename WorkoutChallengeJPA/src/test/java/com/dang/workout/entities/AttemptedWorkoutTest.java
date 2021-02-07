@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 class AttemptedWorkoutTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private AttemptedWorkoutId awoId;
 	private AttemptedWorkout awo;
 
 	@BeforeAll
@@ -32,13 +31,11 @@ class AttemptedWorkoutTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		awoId = new AttemptedWorkoutId(1, 1);
-		awo = em.find(AttemptedWorkout.class, awoId);
+		awo = em.find(AttemptedWorkout.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		awoId = null;
 		awo = null;
 		em.close();
 	}
@@ -47,6 +44,18 @@ class AttemptedWorkoutTest {
 	void test_attemptedWorkout_db_connection() {
 		assertNotNull(awo);
 		assertEquals(true, awo.isCompleted());
+	}
+	@Test
+	void test_attemptedWorkout_user() {
+		User u = awo.getUser();
+		assertNotNull(u);
+		assertEquals(1, u.getId());
+	}
+	@Test
+	void test_attemptedWorkout_workout() {
+		Workout w = awo.getWorkout();
+		assertNotNull(w);
+		assertEquals(1, w.getId());
 	}
 
 }

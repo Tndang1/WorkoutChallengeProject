@@ -69,7 +69,7 @@ class UserTest {
 	}
 	@Test
 	void test_user_attempted_workouts() {
-		List<Workout> aw = user.getAttemptedWorkouts();
+		List<AttemptedWorkout> aw = user.getAttemptedWorkouts();
 		assertNotNull(aw);
 		assertTrue(aw.size() > 0);
 	}

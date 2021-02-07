@@ -30,11 +30,8 @@ public class User {
 	joinColumns = @JoinColumn (name="user_id"),
 	inverseJoinColumns = @JoinColumn(name="workout_id"))
 	private List<Workout> savedWorkouts;
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-	@JoinTable(name="attempted_workout",
-	joinColumns = @JoinColumn (name="user_id"),
-	inverseJoinColumns = @JoinColumn(name="workout_id"))
-	private List<Workout> attemptedWorkouts;
+	@OneToMany(mappedBy="user")
+	private List<AttemptedWorkout> attemptedWorkouts;
 	
 	
 	public int getId() {
@@ -85,10 +82,10 @@ public class User {
 	public void setSavedWorkouts(List<Workout> savedWorkouts) {
 		this.savedWorkouts = savedWorkouts;
 	}
-	public List<Workout> getAttemptedWorkouts() {
+	public List<AttemptedWorkout> getAttemptedWorkouts() {
 		return attemptedWorkouts;
 	}
-	public void setAttemptedWorkouts(List<Workout> attemptedWorkouts) {
+	public void setAttemptedWorkouts(List<AttemptedWorkout> attemptedWorkouts) {
 		this.attemptedWorkouts = attemptedWorkouts;
 	}
 	@Override
