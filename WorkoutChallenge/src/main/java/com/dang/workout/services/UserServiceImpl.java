@@ -27,27 +27,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User createUser(User user) {
-		return userRepo.saveAndFlush(user);
-	}
-
-	@Override
-	public User updateUser(int id, User user) {
-		User dbUser = this.findById(id);
-		if(user.getUsername() != null) {
-			dbUser.setUsername(user.getUsername());
-		}
-		if(user.getPassword() != null) {
-			dbUser.setPassword(user.getPassword());
-		}
-		if(user.getRole() != null) {
-			dbUser.setRole(user.getRole());
-		}
-		dbUser.setEnabled(user.isEnabled());
-		return userRepo.saveAndFlush(dbUser);
-	}
-
-	@Override
 	public List<Workout> findUserSubmissions(int id) {
 		User u = this.findById(id);
 		return u.getSubmittedWorkouts();
